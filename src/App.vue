@@ -9,7 +9,11 @@
               <div class="flex-fill">
                 <select id="cityName" class="form-control" v-model="select.city" @change="select.area = ''">
                   <option value="">-- Select One --</option>
-                  <option :value="city.CityName" v-for="(city, index) in cityData" :key="index">{{ city.CityName }}</option>
+                  <option
+                          :value="city.CityName"
+                          v-for="(city, index) in cityData" :key="index">
+                    {{ city.CityName }}
+                  </option>
                 </select>
               </div>
             </div>
@@ -19,9 +23,10 @@
                 <select id="area" class="form-control" v-if="select.city.length"
                 v-model="select.area" @change="updateSelect">
                   <option value="">-- Select One --</option>
-                  <option :value="area.AreaName"
-                  v-for="area in cityData.find((city) => city.CityName === select.city).AreaList"
-                  :key="area.AreaName">
+                  <option
+                          v-for="area in cityData.find((city) => city.CityName === select.city).AreaList"
+                          :value="area.AreaName"
+                          :key="area.AreaName">
                   {{ area.AreaName }}
                   </option>
                 </select>
@@ -31,10 +36,10 @@
             </div>
           <ul class="list-group">
             <template v-for="(item, key) in pharmacyData">
-              <a class="list-group-item text-left" :key="key"
-                v-if="item.properties.county === select.city
-                && item.properties.town === select.area"
-                :class="{ 'highlight': item.properties.mask_adult || item.properties.mask_child}"
+              <a class="list-group-item text-left"
+                :key="key"
+                v-if="item.properties.county === select.city && item.properties.town === select.area"
+                :class="{ 'highlight': item.properties.mask_adult || item.properties.mask_child }"
                 @click="panTo(item)">
                 <h3>{{ item.properties.name }}</h3>
                 <p class="mb-0">成人口罩：{{ item.properties.mask_adult}} | 兒童口罩： {{ item.properties.mask_child}}</p>
@@ -68,11 +73,11 @@ const iconsConfig = {
 }
 const icons = {
   green: new L.Icon({
-    iconUrl: 'https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-green.png',
+    iconUrl: require('./assets/marker-icon-2x-green.png'),
     ...iconsConfig
   }),
   grey: new L.Icon({
-    iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-grey.png',
+    iconUrl: require('./assets/marker-icon-grey.png'),
     ...iconsConfig
   })
 }
